@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><package xmlns="http://www.idpf.org/2007/opf" version="3.0" unique-identifer="uid">
 <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
-          <dc:identifier id="uid">github.com/oerpub/textbook-demo</dc:identifier>
+          <dc:identifier id="uid">siyavula.com.dummy-book-repo.1.0</dc:identifier>
           <dc:title>Siyavula: Physics Gr 12</dc:title>
           <dc:creator>Siyavula Education</dc:creator>
-          <dc:contributor>OERPUB</dc:contributor>
-          <dc:source xsi:type="dc:URI">http://github.com/siyavula/ieb-physics</dc:source>
           <dc:language>en</dc:language>
           <meta property="dcterms:modified">Mon Aug 19 19:35:43 2013 GMT</meta>
-       </metadata><manifest>
+       </metadata>
+       <manifest>
 <item id="022709acdb3b678b11b449ac7e151e66.png" href="xhtml/physics-12/_plone_ignore_/cache/pspictures/022709acdb3b678b11b449ac7e151e66.png" media-type="image/png"/>
 <item id="02402f112e69c380c60f142dc7b20694.png" href="xhtml/physics-12/_plone_ignore_/cache/pspictures/02402f112e69c380c60f142dc7b20694.png" media-type="image/png"/>
 <item id="02a15ba4712290dfce203490528ba9e0.png" href="xhtml/physics-12/_plone_ignore_/cache/pspictures/02a15ba4712290dfce203490528ba9e0.png" media-type="image/png"/>
