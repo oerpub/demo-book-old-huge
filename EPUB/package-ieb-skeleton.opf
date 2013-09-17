@@ -7,12 +7,12 @@
           <meta property="dcterms:modified">Mon Aug 19 19:54:03 2013 GMT</meta>
        </metadata><manifest>
 <item id="chapter-0" href="xhtml/ieb-skeleton/01-Vectors.cnxmlplus.html" media-type="application/xhtml+xml"/>
-<item id="chapter-1" href="xhtml/ieb-skeleton/02-Kinematics.cnxmlplus.html" media-type="application/xhtml+xml"/>
+<item href="xhtml/physics-12/12219ef1-bab8-43af-8974-3facdcb1a615" id="xhtml/physics-12/12219ef1-bab8-43af-8974-3facdcb1a615" media-type="application/xhtml+xml"/><item id="chapter-1" href="xhtml/ieb-skeleton/02-Kinematics.cnxmlplus.html" media-type="application/xhtml+xml"/>
 <item id="chapter-2" href="xhtml/ieb-skeleton/03-NewtonsLaws.cnxmlplus.html" media-type="application/xhtml+xml"/>
 <item id="chapter-3" href="xhtml/ieb-skeleton/04-MomentumAndImpulse.cnxmlplus.html" media-type="application/xhtml+xml"/>
 <item id="chapter-4" href="xhtml/ieb-skeleton/05-WorkEnergyPower.cnxmlplus.html" media-type="application/xhtml+xml"/>
 <item id="chapter-5" href="xhtml/ieb-skeleton/06-NewtonsLawUniversalGravitation.cnxmlplus.html" media-type="application/xhtml+xml"/>
-<item id="chapter-6" href="xhtml/ieb-skeleton/07-Electrostatics.cnxmlplus.html" media-type="application/xhtml+xml"/>
+<item href="../resources/5ddd97c36fbe303f4a7bb73dcff6d79df45663a9.png" id="../resources/5ddd97c36fbe303f4a7bb73dcff6d79df45663a9.png" media-type="image/png"/><item id="chapter-6" href="xhtml/ieb-skeleton/07-Electrostatics.cnxmlplus.html" media-type="application/xhtml+xml"/>
 <item id="chapter-7" href="xhtml/ieb-skeleton/08-ElectricCircuits.cnxmlplus.html" media-type="application/xhtml+xml"/>
 <item id="chapter-8" href="xhtml/ieb-skeleton/09-Electrodynamics.cnxmlplus.html" media-type="application/xhtml+xml"/>
 <item href="xhtml/physics-12/dd442855-5453-407e-aa95-a8c78c4e1d97" id="xhtml/physics-12/dd442855-5453-407e-aa95-a8c78c4e1d97" media-type="application/xhtml+xml"/><item id="chapter-9" href="xhtml/ieb-skeleton/10-PhotoElectricEffectAndEmissionSpectra.cnxmlplus.html" media-type="application/xhtml+xml"/>
