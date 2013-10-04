@@ -3,10 +3,75 @@
 <head>
 <title>Content of EPUB</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style text>
+#books {
+  float: left;
+  border: 1px solid red;
+  width: 400px;
+}
+
+#navs {
+  float: left;
+  left: 200px;
+  width: 200px;
+  border: 1px solid blue;
+  display:none;
+  visibility: hidden;
+}
+
+#content {
+  margin-left: 400px;
+  border: 1px solid green;
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mathjax" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-MML-AM_HTMLorMML-full&amp;amp;delayStartupUntil=configured"></script>
+     <script>
+        $(document).ready(function(){
+            // Parse EPUB:
+            // Parse container.xml
+            $.ajax({
+                type: "GET",
+                url: "META-INF/container.xml",
+                dataType: "xml",
+                success: function(xml) {
+                    $(xml).find('rootfile').each(function(){
+                        var opf = $(this).attr('full-path');
+                        // Parse OPFs
+                        $.ajax({
+                            type: "GET",
+                            url: opf,
+                            dataType: "xml",
+                            success: function(xml) {
+                                $(xml).find('item[properties="nav"]').each(function(){
+                                    var nav = $(this).attr('href');
+                                    nav = 'EPUB/' + nav; // TODO: THIS IS A HACK for our eBooks! Needs to be dynamically!
+                                    $.get(nav)
+                                       .success(function(data) {
+                                            $('<div class="book"></div>').html(data).appendTo('#books');
+                                       })
+                                });
+                            }
+                        });
+                    });
+                }
+            });
+
+            // Prevent opening links. 
+            $('#books').on('click', 'a', function(e) {
+               e.preventDefault();
+               var contenturl = $(this).attr('href');
+               contenturl = 'EPUB/xhtml/ieb-skeleton/' + contenturl; // TODO: HACK!!!
+               $('#content').load(contenturl);
+            });
+       });
+     </script>
 </head>
 <body>
   <h1>Contents of EPUB</h1>
-  <p><a href="EPUB/xhtml/physics-12/physics-12.nav.html">Physics 12</a></p>
-  <p><a href="EPUB/xhtml/ieb-skeleton/ieb-skeleton.nav.html">Skeleton</a></p>
+  <div id="books"></div>
+  <div id="navs"></div>
+  <div id="content"></div>
 </body>
 </html>
