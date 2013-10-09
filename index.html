@@ -26,7 +26,7 @@
 </style>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mathjax" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-MML-AM_HTMLorMML-full&amp;amp;delayStartupUntil=configured"></script>
+<script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mathjax" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-MML-AM_HTMLorMML-full"></script>
      <script>
         $(document).ready(function(){
             // Parse EPUB:
@@ -62,8 +62,17 @@
             $('#books').on('click', 'a', function(e) {
                e.preventDefault();
                var contenturl = $(this).attr('href');
-               contenturl = 'EPUB/xhtml/ieb-skeleton/' + contenturl; // TODO: HACK!!!
-               $('#content').load(contenturl);
+               contenturl = 'EPUB/xhtml/physics-12/' + contenturl; // TODO: HACK!!!
+               $("#content").load(contenturl, 
+                    function (responseText, textStatus, XMLHttpRequest) {
+                      if (textStatus == "success") {
+                         MathJax.Hub.Queue(["Typeset",MathJax.Hub,'content']);
+                      }
+                      if (textStatus == "error") {
+                           // oh noes!
+                      }
+                    }
+              );
             });
        });
      </script>
