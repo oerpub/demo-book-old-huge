@@ -28,6 +28,23 @@
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mathjax" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-MML-AM_HTMLorMML-full"></script>
      <script>
+
+        // get relative path from a filename url
+        // e.g. http://whatever.com/here/togo/file.htm
+        // returns /here/togo/
+        function getDirectory(url)
+        {
+          var tempurl = document.createElement('a');
+          tempurl.href = url;
+          var pathArray = tempurl.pathname.split('/');
+          var newPathname = "";
+          for ( i = 0; i < pathArray.length-1; i++ ) {
+            newPathname += pathArray[i];
+            newPathname += "/";
+          }
+          return newPathname;
+        }
+
         $(document).ready(function(){
             // Parse EPUB:
             // Parse container.xml
@@ -38,6 +55,7 @@
                 success: function(xml) {
                     $(xml).find('rootfile').each(function(){
                         var opf = $(this).attr('full-path');
+
                         // Parse OPFs
                         $.ajax({
                             type: "GET",
@@ -46,10 +64,13 @@
                             success: function(xml) {
                                 $(xml).find('item[properties="nav"]').each(function(){
                                     var nav = $(this).attr('href');
-                                    nav = 'EPUB/' + nav; // TODO: THIS IS A HACK for our eBooks! Needs to be dynamically!
+                                    nav = getDirectory(opf) + nav;
                                     $.get(nav)
                                        .success(function(data) {
-                                            $('<div class="book"></div>').html(data).appendTo('#books');
+                                            $('<div class="book"></div>')
+                                              .attr('directory', getDirectory(nav))
+                                              .html(data)
+                                              .appendTo('#books');
                                        })
                                 });
                             }
@@ -61,8 +82,10 @@
             // Prevent opening links. 
             $('#books').on('click', 'a', function(e) {
                e.preventDefault();
+               // replace wrong relative path with correct one.
+               // TODO: better replace every a link on load. Would be less hackish.
                var contenturl = $(this).attr('href');
-               contenturl = 'EPUB/xhtml/physics-12/' + contenturl; // TODO: HACK!!!
+               contenturl = $(this).parents('div[class="book"]').attr('directory') + contenturl;
                $("#content").load(contenturl, 
                     function (responseText, textStatus, XMLHttpRequest) {
                       if (textStatus == "success") {
