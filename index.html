@@ -6,22 +6,29 @@
 <style text>
 #books {
   float: left;
-  border: 1px solid red;
+  border: 1px solid lightgray;
   width: 400px;
+}
+
+.book {
+  padding: 10px;
+  background-color: lightgray;
 }
 
 #navs {
   float: left;
   left: 200px;
   width: 200px;
-  border: 1px solid blue;
+  border: 1px solid lightgray;
   display:none;
   visibility: hidden;
 }
 
 #content {
   margin-left: 400px;
-  border: 1px solid green;
+  padding: 20px;
+  border: 1px solid lightgray;
+  display: none;
 }
 </style>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
@@ -68,7 +75,7 @@
                                     $.get(nav)
                                        .success(function(data) {
                                             $('<div class="book"></div>')
-                                              .attr('directory', getDirectory(nav))
+                                              .attr('data-directory', getDirectory(nav))
                                               .html(data)
                                               .appendTo('#books');
                                        })
@@ -85,8 +92,8 @@
                // replace wrong relative path with correct one.
                // TODO: better replace every a link on load. Would be less hackish.
                var contenturl = $(this).attr('href');
-               contenturl = $(this).parents('div[class="book"]').attr('directory') + contenturl;
-               $("#content").load(contenturl, 
+               contenturl = $(this).parents('div[class="book"]').attr('data-directory') + contenturl;
+               $("#content").show().load(contenturl, 
                     function (responseText, textStatus, XMLHttpRequest) {
                       if (textStatus == "success") {
                          MathJax.Hub.Queue(["Typeset",MathJax.Hub,'content']);
