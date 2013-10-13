@@ -13,6 +13,9 @@
 .book {
   padding: 10px;
   background-color: lightgray;
+  . h1 {
+    display: none;
+  }
 }
 
 #navs {
@@ -72,14 +75,21 @@
                                 $(xml).find('item[properties="nav"]').each(function(){
                                     var nav = $(this).attr('href');
                                     nav = getDirectory(opf) + nav;
-                                    $.get(nav)
-                                       .success(function(data) {
                                             $('<div class="book"></div>')
                                               .attr('data-directory', getDirectory(nav))
-                                              .html(data)
+                                              .load(nav, function() {
+                                                  if (! $(this).children('h1').length) {
+                                                    $(this).prepend('<h1></h1>');
+                                                  }
+                                                    $(this).children('h1')[0].innerHTML = $(xml).find('title').text();
+                                                  $(this).contents()
+                                                    .filter(function () {
+                                                       return this.nodeType == 3;
+                                                    }).remove()
+                                              })
                                               .appendTo('#books');
-                                       })
                                 });
+
                             }
                         });
                     });
@@ -91,17 +101,17 @@
                e.preventDefault();
                // replace wrong relative path with correct one.
                // TODO: better replace every a link on load. Would be less hackish.
+               var relativeDirectory = $(this).parents('div[class="book"]').attr('data-directory');
                var contenturl = $(this).attr('href');
-               contenturl = $(this).parents('div[class="book"]').attr('data-directory') + contenturl;
+               contenturl = relativeDirectory + contenturl;
                $("#content").show().load(contenturl, 
-                    function (responseText, textStatus, XMLHttpRequest) {
-                      if (textStatus == "success") {
-                         MathJax.Hub.Queue(["Typeset",MathJax.Hub,'content']);
-                      }
-                      if (textStatus == "error") {
-                           // oh noes!
-                      }
-                    }
+                  function () {
+                    $(this).find('img').not('[src^="http"],[src^="https"],[src^="/"]').each(function(){
+                      var newImageSrc = relativeDirectory + $(this).attr('src');
+                      $(this).attr('src', newImageSrc)
+                    });
+                    MathJax.Hub.Queue(["Typeset",MathJax.Hub,'content']);
+                  }
               );
             });
        });
