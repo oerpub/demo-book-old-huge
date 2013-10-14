@@ -290,7 +290,7 @@
 <item id="nav" href="xhtml/physics-12/physics-12.nav.html" media-type="application/xhtml+xml" properties="nav"/>
 <item id="photo_electric_apparatus.png" href="xhtml/physics-12/images/photo_electric_apparatus.png" media-type="image/png"/>
 <item id="solar-panels-ell-r-brown-flickr.jpg" href="xhtml/physics-12/photos/solar-panels-ell-r-brown-flickr.jpg" media-type="image/jpeg"/>
-</manifest><spine>
+<item href="62b61608-920f-45e9-be97-372e1a535855" id="62b61608-920f-45e9-be97-372e1a535855" media-type="application/xhtml+xml"/><item href="de3caccc-49ab-4535-a072-21d3c844b1cc" id="de3caccc-49ab-4535-a072-21d3c844b1cc" media-type="application/xhtml+xml"/></manifest><spine>
 <itemref idref="chapter-0"/>
 <itemref idref="chapter-1"/>
 <itemref idref="chapter-2"/>
