@@ -63,6 +63,7 @@
                             url: opf,
                             dataType: "xml",
                             success: function(xml) {
+                                var booktitle = $(xml).find('dc\\:title, title').text();
                                 $(xml).find('item[properties="nav"]').each(function(){
                                     var nav = $(this).attr('href');
                                     nav = getDirectory(opf) + nav;
@@ -72,7 +73,7 @@
                                                   if (! $(this).children('h1').length) {
                                                     $(this).prepend('<h1></h1>');
                                                   }
-                                                    $(this).children('h1')[0].innerHTML = $(xml).find('title').text();
+                                                    $(this).children('h1').eq(0).text(booktitle);
                                                   $(this).contents()
                                                     .filter(function () {
                                                        return this.nodeType == 3;
