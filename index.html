@@ -74,10 +74,11 @@
                                                     $(this).prepend('<h1></h1>');
                                                   }
                                                     $(this).children('h1').eq(0).text(booktitle);
+                                                  // filter not enclosed text out before we reach the first tag
                                                   $(this).contents()
-                                                    .filter(function () {
-                                                       return this.nodeType == 3;
-                                                    }).remove()
+                                                  .filter(function () {
+                                                      return this.nodeType === 3;
+                                                  }).first().remove();
                                               })
                                               .appendTo('#books');
                                 });
