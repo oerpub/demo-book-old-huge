@@ -6,6 +6,7 @@
           <dc:language>en</dc:language>
           <meta property="dcterms:modified">Mon Aug 19 19:54:03 2013 GMT</meta>
        </metadata><manifest>
+<item id="intro" href="Project-intro.html" media-type="application/xhtml+xml"/>
 <item id="chapter-0" href="01-Vectors.cnxmlplus.html" media-type="application/xhtml+xml"/>
 <item id="chapter-1" href="02-Kinematics.cnxmlplus.html" media-type="application/xhtml+xml"/>
 <item id="chapter-2" href="03-NewtonsLaws.cnxmlplus.html" media-type="application/xhtml+xml"/>
@@ -19,6 +20,7 @@
 <item id="chapter-10" href="template.cnxmlplus.html" media-type="application/xhtml+xml"/>
 <item id="nav" href="ieb-physics-skeleton-nav.html" media-type="application/xhtml+xml" properties="nav"/>
 </manifest><spine>
+<itemref idref="intro"/>
 <itemref idref="chapter-0"/>
 <itemref idref="chapter-1"/>
 <itemref idref="chapter-2"/>
