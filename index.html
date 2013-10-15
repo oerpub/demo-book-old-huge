@@ -28,6 +28,7 @@
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" charset="utf-8" async="" data-requirecontext="_" data-requiremodule="mathjax" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-MML-AM_HTMLorMML-full"></script>
+<script type="text/javascript" src="http://latex2html5.com/latex2html5.min.js"></script>
      <script>
 
         // get relative path from a filename url
@@ -68,8 +69,8 @@
                                     var nav = $(this).attr('href');
                                     nav = getDirectory(opf) + nav;
                                             $('<div class="book"></div>')
-                                              .attr('data-directory', getDirectory(nav))
                                               .load(nav, function() {
+                                                  // set booktitle
                                                   if (! $(this).children('h1').length) {
                                                     $(this).prepend('<h1></h1>');
                                                   }
@@ -79,6 +80,11 @@
                                                   .filter(function () {
                                                       return this.nodeType === 3;
                                                   }).first().remove();
+                                                  // replace every relative link in navigation
+                                                  $(this).find('a').not('[href^="http"],[src^="https"],[src^="/"],[src^="mailto"]').each(function(){
+                                                    var newLink = getDirectory(nav) + $(this).attr('href');
+                                                    $(this).attr('href', newLink);
+                                                  });
                                               })
                                               .appendTo('#books');
                                 });
@@ -88,13 +94,12 @@
                 }
             });
 
-            // Prevent opening links. 
+            // Prevent opening links 
             $('#books').on('click', 'a', function(e) {
                e.preventDefault();
-               var relativeDirectory = $(this).parents('div[class="book"]').attr('data-directory');
-               var contenturl = $(this).attr('href');
-               contenturl = relativeDirectory + contenturl;
-               $.get(contenturl)
+               var contentUrl = $(this).attr('href');
+               var relativeDirectory = getDirectory(contentUrl);
+               $.get(contentUrl)
                  .success(function(data) {
                     var $data = $(data);
                     $data.find('img').not('[src^="http"],[src^="https"],[src^="/"]').each(function(){
